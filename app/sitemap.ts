@@ -1,0 +1,14 @@
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
+
+// Emitted as a file at build time, not served by a running route.
+export const dynamic = "force-static";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  return [
+    { url: SITE_URL, lastModified: now, priority: 1 },
+    { url: `${SITE_URL}/privacy`, lastModified: now, priority: 0.3 },
+    { url: `${SITE_URL}/terms`, lastModified: now, priority: 0.3 },
+  ];
+}

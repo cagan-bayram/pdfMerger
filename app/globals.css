@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  /* A desk, with paper on it. */
+  --color-desk: #dde4ea;
+  --color-desk-deep: #c9d3dc;
+  --color-sheet: #ffffff;
+  --color-ink: #16283d;
+  --color-ink-soft: #52687f;
+  --color-rule: #c3ceda;
+  --color-stamp: #63288f;
+  --color-stamp-deep: #4e1f72;
+  --color-alert: #a3301b;
+
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-body: var(--font-public-sans), system-ui, sans-serif;
+
+  /* A trimmed sheet corner, not a pill. */
+  --radius-sheet: 4px;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-desk);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  /* Counts and page ranges line up column-wise. */
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-stamp);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

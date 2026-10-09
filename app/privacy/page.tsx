@@ -8,8 +8,9 @@ export const metadata: Metadata = {
     "What Quire does and does not collect. Your PDFs are processed in your browser and never uploaded.",
 };
 
-// Replace the bracketed placeholders before launch. An AdSense reviewer reads
-// this page, and so do people deciding whether to trust the tool.
+// Keep this accurate: an ad network reviewer reads it, and so do people
+// deciding whether to trust the tool. If the site starts collecting anything
+// it does not collect today, say so here and bump the date.
 export default function Privacy() {
   return (
     <main className="mx-auto w-full max-w-[68ch] flex-1 px-5 py-12">

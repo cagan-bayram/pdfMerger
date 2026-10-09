@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: "The terms of use for Quire.",
 };
 
-// Replace the bracketed placeholders before launch. This is a plain-language
-// starting point, not legal advice — have it checked if the site earns real money.
+// A plain-language starting point, not legal advice — worth having checked if
+// the site ever earns real money. Bump the date above whenever this changes.
 export default function Terms() {
   return (
     <main className="mx-auto w-full max-w-[68ch] flex-1 px-5 py-12">

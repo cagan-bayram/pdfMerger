@@ -1,7 +1,7 @@
 // Change this to your real domain before launch: it drives canonical URLs,
 // OG tags, robots.txt and sitemap.xml. AdSense also wants a real domain.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://quire.tools";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://quire-beryl.vercel.app";
 
 export const SITE_NAME = "Quire";
 export const SITE_TAGLINE = "Merge PDFs in your browser";

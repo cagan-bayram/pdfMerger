@@ -43,6 +43,9 @@ next-env.d.ts
 # AI Stuff
 /.remember/
 AGENTS.md
-!.env.example
 
 /.playwright-mcp/
+
+.vercel
+.env*
+!.env.example

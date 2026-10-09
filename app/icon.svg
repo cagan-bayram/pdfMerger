@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Stack PDF">
+  <rect width="32" height="32" rx="6.5" fill="#63288F"/>
+  <!-- Two sheets gathering into one stack. Only two shapes, a wide violet
+       separation and minimal tile padding, so it still reads as paper at 16px. -->
+  <rect x="5.5" y="4.5" width="14" height="18" rx="1.5" fill="#FFFFFF" opacity="0.55"/>
+  <rect x="11" y="9" width="15.5" height="18.5" rx="1.5" fill="#FFFFFF" stroke="#63288F" stroke-width="2"/>
+</svg>

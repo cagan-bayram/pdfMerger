@@ -5,7 +5,7 @@ import { SITE_NAME } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "What Quire does and does not collect. Your PDFs are processed in your browser and never uploaded.",
+    "What Stack PDF does and does not collect. Your PDFs are processed in your browser and never uploaded.",
 };
 
 // Keep this accurate: an ad network reviewer reads it, and so do people

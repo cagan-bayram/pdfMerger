@@ -3,7 +3,7 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://quire-beryl.vercel.app";
 
-export const SITE_NAME = "Quire";
+export const SITE_NAME = "Stack PDF";
 export const SITE_TAGLINE = "Merge PDFs in your browser";
 
 // Set to your AdSense publisher id (ca-pub-XXXXXXXXXXXXXXXX) once approved.

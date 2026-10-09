@@ -79,7 +79,7 @@ export async function mergePdfs(
 
   // pdf-lib overwrites Producer with its own name at save time, so only
   // Creator is ours to set.
-  out.setCreator("Quire");
+  out.setCreator("Stack PDF");
   out.setModificationDate(new Date());
   const bytes = await out.save();
   return new Blob([bytes as BlobPart], { type: "application/pdf" });

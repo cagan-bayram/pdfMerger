@@ -1,4 +1,4 @@
-# Quire
+# Stack PDF
 
 A PDF merger that runs entirely in the browser. Files are never uploaded —
 there is no backend to upload them to. The site builds to a static export, so

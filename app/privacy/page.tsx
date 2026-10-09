@@ -61,6 +61,21 @@ export default function Privacy() {
         </section>
 
         <section>
+          <h2 className="text-base font-bold">Analytics</h2>
+          <p className="mt-2 text-ink-soft">
+            We count page views with Vercel Web Analytics, to see which pages
+            people find useful. It records the page address, the site you
+            arrived from, and coarse details like country, device type and
+            browser. It sets no cookie, does not use your device&rsquo;s
+            storage, and does not follow you across other sites. To count
+            returning visits within a day it derives a one-way hash from your
+            IP address and browser, which is discarded daily and cannot be
+            turned back into either. It never sees the documents you merge,
+            because those are never sent anywhere.
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-base font-bold">Hosting</h2>
           <p className="mt-2 text-ink-soft">
             The site is hosted on Vercel, which keeps standard server logs of

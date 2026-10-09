@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Archivo, Public_Sans } from "next/font/google";
 import Script from "next/script";
@@ -48,6 +49,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-desk">
         {children}
+        {/* Page counts only: no cookie, no cross-site profile, no personal
+            data. The privacy page describes exactly this — keep them in step. */}
+        <Analytics />
         {ADSENSE_CLIENT ? (
           <Script
             async

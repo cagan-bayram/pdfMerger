@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/components/ad-slot";
 import { Merger } from "@/components/merger";
+import { Faq, SiteFooter, SiteHeader, guides } from "@/components/site-chrome";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Merge PDFs in your browser",
   description:
     "Combine PDF files into one without uploading them. Set the page order, merge, download. Free, no sign-up, no file size limit.",
+  alternates: { canonical: "/" },
 };
 
 const faq = [
   {
     q: "Are my files uploaded anywhere?",
-    a: "No. The merge runs in your browser using WebAssembly, so the documents never leave your device. You can check for yourself: open your browser's network tab and merge a file — there are no upload requests. The site has no server to send them to.",
+    a: "No. The merge runs in your browser, so the documents never leave your device. You can check for yourself: open your browser's network tab and merge a file — there are no upload requests. The site has no server to send them to.",
   },
   {
     q: "Is there a file size limit?",
@@ -36,24 +38,7 @@ const faq = [
 export default function Home() {
   return (
     <>
-      <header className="border-b border-rule bg-sheet">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <Link
-            href="/"
-            className="font-display text-xl font-extrabold tracking-[-0.03em]"
-          >
-            {SITE_NAME}
-          </Link>
-          <nav className="flex gap-5 text-sm text-ink-soft">
-            <a href="#faq" className="hover:text-ink">
-              Questions
-            </a>
-            <Link href="/privacy" className="hover:text-ink">
-              Privacy
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-8 lg:py-12">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12">
@@ -100,21 +85,25 @@ export default function Home() {
               </div>
             </section>
 
-            <section id="faq" className="mt-14 max-w-[68ch] scroll-mt-6">
+            <section className="mt-14 max-w-[68ch]">
               <h2 className="border-b border-rule pb-2 text-lg font-bold tracking-tight">
-                Questions
+                Guides
               </h2>
-              <dl className="mt-4 flex flex-col divide-y divide-rule">
-                {faq.map((item) => (
-                  <div key={item.q} className="py-4">
-                    <dt className="text-sm font-semibold">{item.q}</dt>
-                    <dd className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                      {item.a}
-                    </dd>
-                  </div>
+              <ul className="mt-4 flex flex-col gap-2 text-sm">
+                {guides.map((guide) => (
+                  <li key={guide.href}>
+                    <Link
+                      href={guide.href}
+                      className="text-stamp underline decoration-rule underline-offset-2 hover:decoration-stamp"
+                    >
+                      {guide.title}
+                    </Link>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </section>
+
+            <Faq items={faq} />
           </div>
 
           <div className="hidden lg:block">
@@ -129,46 +118,20 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="border-t border-rule bg-sheet">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-sm text-ink-soft">
-          <p>
-            {SITE_NAME} — merging stays on your device.
-          </p>
-          <nav className="flex gap-5">
-            <Link href="/privacy" className="hover:text-ink">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-ink">
-              Terms
-            </Link>
-          </nav>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <script
         type="application/ld+json"
-        // Static, build-time JSON from the array above: nothing user-supplied.
+        // Static, build-time JSON: nothing user-supplied.
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "WebApplication",
-                name: SITE_NAME,
-                url: SITE_URL,
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Any browser",
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
-              {
-                "@type": "FAQPage",
-                mainEntity: faq.map((item) => ({
-                  "@type": "Question",
-                  name: item.q,
-                  acceptedAnswer: { "@type": "Answer", text: item.a },
-                })),
-              },
-            ],
+            "@type": "WebApplication",
+            name: SITE_NAME,
+            url: SITE_URL,
+            applicationCategory: "UtilitiesApplication",
+            operatingSystem: "Any browser",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           }),
         }}
       />

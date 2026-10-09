@@ -49,3 +49,5 @@ AGENTS.md
 .vercel
 .env*
 !.env.example
+
+NOTES.md

@@ -21,7 +21,8 @@ export default function Privacy() {
         Privacy
       </h1>
       <p className="mt-2 text-sm text-ink-soft">
-        Last updated [DATE]. Contact: [YOUR EMAIL].
+        Last updated 9 October 2026. Contact:
+        cagansoftwareengineering@outlook.com.
       </p>
 
       <div className="mt-8 flex flex-col gap-6 text-sm leading-relaxed">
@@ -59,16 +60,6 @@ export default function Privacy() {
         </section>
 
         <section>
-          <h2 className="text-base font-bold">Analytics</h2>
-          <p className="mt-2 text-ink-soft">
-            We count page views with [ANALYTICS PROVIDER] to see which pages
-            people find useful. It records the page URL, the referring site and
-            a coarse country, with no cookie and no cross-site profile. If you
-            remove analytics from the site, delete this section.
-          </p>
-        </section>
-
-        <section>
           <h2 className="text-base font-bold">Hosting</h2>
           <p className="mt-2 text-ink-soft">
             The site is hosted on Vercel, which keeps standard server logs of
@@ -84,7 +75,7 @@ export default function Privacy() {
             We hold no account, no email address and no document, so there is
             nothing on our side to export or delete. For ad data held by
             Google, use the Google controls linked above. Questions about this
-            page: [YOUR EMAIL].
+            page: cagansoftwareengineering@outlook.com.
           </p>
         </section>
       </div>

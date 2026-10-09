@@ -20,7 +20,8 @@ export default function Terms() {
         Terms
       </h1>
       <p className="mt-2 text-sm text-ink-soft">
-        Last updated [DATE]. Contact: [YOUR EMAIL].
+        Last updated 9 October 2026. Contact:
+        cagansoftwareengineering@outlook.com.
       </p>
 
       <div className="mt-8 flex flex-col gap-6 text-sm leading-relaxed">
@@ -68,7 +69,7 @@ export default function Terms() {
           <h2 className="text-base font-bold">Changes</h2>
           <p className="mt-2 text-ink-soft">
             These terms may change; the date above shows the current version.
-            They are governed by the laws of [YOUR COUNTRY].
+            They are governed by the laws of the UK.
           </p>
         </section>
       </div>

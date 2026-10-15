@@ -7,6 +7,22 @@ export const guides = [
     title: "Merge a PDF without uploading it",
   },
   {
+    href: "/is-it-safe-to-merge-pdfs-online",
+    title: "Is it safe to merge PDFs online?",
+  },
+  {
+    href: "/merge-pdfs-without-acrobat",
+    title: "Combine PDFs without Adobe Acrobat",
+  },
+  {
+    href: "/merge-pdfs-on-iphone",
+    title: "Merge PDFs on iPhone or iPad",
+  },
+  {
+    href: "/merge-cv-and-cover-letter",
+    title: "Combine a CV and cover letter",
+  },
+  {
     href: "/merge-scanned-passport-pages",
     title: "Merge scanned passport pages",
   },
@@ -111,9 +127,16 @@ export function Faq({ items, id = "faq" }: { items: QA[]; id?: string }) {
   );
 }
 
-/** Links to the other guides, so each page has a way out that is not the tool. */
+/**
+ * Links to other guides, so each page has a way out that is not the tool.
+ * Capped at four and rotated by position, so every guide gets linked from
+ * somewhere without any page turning into a wall of links.
+ */
 export function MoreGuides({ exclude }: { exclude: string }) {
-  const others = guides.filter((guide) => guide.href !== exclude);
+  const start = guides.findIndex((guide) => guide.href === exclude) + 1;
+  const others = Array.from({ length: guides.length - 1 }, (_, offset) => {
+    return guides[(start + offset) % guides.length];
+  }).slice(0, 4);
   return (
     <section className="mt-14 max-w-[68ch]">
       <h2 className="border-b border-rule pb-2 text-lg font-bold tracking-tight">

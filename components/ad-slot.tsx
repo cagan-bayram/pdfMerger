@@ -25,15 +25,20 @@ type AdSlotProps = {
 export function AdSlot({ slot, width, height, label, className }: AdSlotProps) {
   const pushed = useRef(false);
 
+  // Until real ad unit ids exist, the `0000000000` placeholders would only
+  // make adsbygoogle throw. The script itself still loads from the layout,
+  // which is what AdSense needs to verify the site.
+  const live = ADSENSE_CLIENT !== "" && !/^0+$/.test(slot);
+
   useEffect(() => {
-    if (!ADSENSE_CLIENT || pushed.current) return;
+    if (!live || pushed.current) return;
     pushed.current = true;
     try {
       (window.adsbygoogle = window.adsbygoogle ?? []).push({});
     } catch {
       // A blocked or missing script is not an error worth surfacing.
     }
-  }, []);
+  }, [live]);
 
   return (
     <aside
@@ -41,7 +46,7 @@ export function AdSlot({ slot, width, height, label, className }: AdSlotProps) {
       className={className}
       style={{ width, height, maxWidth: "100%" }}
     >
-      {ADSENSE_CLIENT ? (
+      {live ? (
         <ins
           className="adsbygoogle block"
           style={{ display: "block", width, height }}

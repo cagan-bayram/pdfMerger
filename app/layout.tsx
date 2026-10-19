@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Archivo, Public_Sans } from "next/font/google";
-import Script from "next/script";
 import { ADSENSE_CLIENT, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -52,10 +51,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Page counts only: no cookie, no cross-site profile, no personal
             data. The privacy page describes exactly this — keep them in step. */}
         <Analytics />
+        {/* A plain tag rather than next/script: `afterInteractive` injects the
+            script client-side, leaving only a preload hint in the HTML, and
+            AdSense asks for the snippet itself between the head tags. React
+            hoists this into <head> while `async` keeps it off the critical
+            path. */}
         {ADSENSE_CLIENT ? (
-          <Script
+          <script
             async
-            strategy="afterInteractive"
             crossOrigin="anonymous"
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
           />

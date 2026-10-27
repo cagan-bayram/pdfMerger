@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Privacy",
   description:
     "What Stack PDF does and does not collect. Your PDFs are processed in your browser and never uploaded.",
+  alternates: { canonical: "/privacy" },
 };
 
 // Keep this accurate: an ad network reviewer reads it, and so do people

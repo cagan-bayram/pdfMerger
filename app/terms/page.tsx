@@ -5,6 +5,7 @@ import { SITE_NAME } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms",
   description: "The terms of use for Stack PDF.",
+  alternates: { canonical: "/terms" },
 };
 
 // A plain-language starting point, not legal advice — worth having checked if

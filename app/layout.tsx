@@ -27,7 +27,9 @@ export const metadata: Metadata = {
   description:
     "Combine PDF files into one without uploading them. Merging happens in your browser, so your documents never reach a server. Free, no sign-up, no file limits.",
   applicationName: SITE_NAME,
-  alternates: { canonical: "/" },
+  // No canonical here on purpose: a canonical in the root layout is inherited
+  // by every page that does not set its own, which tells Google those pages are
+  // duplicates of the homepage. Each page declares its own.
   openGraph: {
     type: "website",
     url: SITE_URL,

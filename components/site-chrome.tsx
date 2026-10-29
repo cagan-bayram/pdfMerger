@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { SITE_NAME } from "@/lib/site";
 
+export const tools = [
+  { href: "/", title: "Merge PDFs" },
+  { href: "/jpg-to-pdf", title: "Convert JPG to PDF" },
+] as const;
+
 export const guides = [
   {
     href: "/merge-pdf-without-uploading",
@@ -63,6 +68,14 @@ export function SiteFooter() {
           <p className="text-ink">{SITE_NAME}</p>
           <p className="mt-1">Merging stays on your device.</p>
         </div>
+
+        <nav className="flex flex-col gap-2">
+          {tools.map((tool) => (
+            <Link key={tool.href} href={tool.href} className="hover:text-ink">
+              {tool.title}
+            </Link>
+          ))}
+        </nav>
 
         <nav className="flex flex-col gap-2">
           {guides.map((guide) => (
@@ -134,9 +147,15 @@ export function Faq({ items, id = "faq" }: { items: QA[]; id?: string }) {
  */
 export function MoreGuides({ exclude }: { exclude: string }) {
   const start = guides.findIndex((guide) => guide.href === exclude) + 1;
-  const others = Array.from({ length: guides.length - 1 }, (_, offset) => {
+  const rotated = Array.from({ length: guides.length - 1 }, (_, offset) => {
     return guides[(start + offset) % guides.length];
-  }).slice(0, 4);
+  });
+  // Lead with the other tools: a guide reader often needs a different tool,
+  // not another article.
+  const others = [
+    ...tools.filter((tool) => tool.href !== "/" && tool.href !== exclude),
+    ...rotated,
+  ].slice(0, 4);
   return (
     <section className="mt-14 max-w-[68ch]">
       <h2 className="border-b border-rule pb-2 text-lg font-bold tracking-tight">

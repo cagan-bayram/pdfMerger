@@ -2,39 +2,37 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { formatBytes, type Sheet } from "@/lib/merge";
+import type { StackItem } from "@/components/stack";
 
 /** How thick the sheet looks: more pages, more stacked edges behind the row. */
-function edgeCount(pageCount: number): number {
-  if (pageCount >= 25) return 3;
-  if (pageCount >= 8) return 2;
-  if (pageCount >= 2) return 1;
+function edgeCount(thickness: number): number {
+  if (thickness >= 25) return 3;
+  if (thickness >= 8) return 2;
+  if (thickness >= 2) return 1;
   return 0;
 }
 
-type SheetRowProps = {
-  sheet: Sheet;
+type StackRowProps = {
+  item: StackItem;
   position: number;
-  range: { start: number; end: number };
   onRemove: () => void;
   onMove: (direction: -1 | 1) => void;
   isFirst: boolean;
   isLast: boolean;
 };
 
-export function SheetRow({
-  sheet,
+export function StackRow({
+  item,
   position,
-  range,
   onRemove,
   onMove,
   isFirst,
   isLast,
-}: SheetRowProps) {
+}: StackRowProps) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: sheet.id });
+    useSortable({ id: item.id });
 
-  const edges = edgeCount(sheet.pageCount);
+  const edges = edgeCount(item.thickness ?? 1);
 
   return (
     <li
@@ -64,7 +62,7 @@ export function SheetRow({
         <button
           type="button"
           className="shrink-0 cursor-grab touch-none rounded p-1 text-ink-soft hover:text-ink active:cursor-grabbing"
-          aria-label={`Reorder ${sheet.name}`}
+          aria-label={`Reorder ${item.name}`}
           {...attributes}
           {...listeners}
         >
@@ -87,32 +85,36 @@ export function SheetRow({
           {position}
         </span>
 
-        <span className="min-w-0 flex-1 truncate text-sm font-medium" title={sheet.name}>
-          {sheet.name}
+        <span className="min-w-0 flex-1 truncate text-sm font-medium" title={item.name}>
+          {item.name}
         </span>
 
-        <span className="hidden shrink-0 text-xs text-ink-soft sm:block">
-          {formatBytes(sheet.file.size)}
-        </span>
+        {item.aside ? (
+          <span className="hidden shrink-0 text-xs text-ink-soft sm:block">
+            {item.aside}
+          </span>
+        ) : null}
 
-        <span className="hidden shrink-0 text-xs text-ink-soft sm:block">
-          {sheet.pageCount} {sheet.pageCount === 1 ? "page" : "pages"}
-        </span>
+        {item.meta ? (
+          <span className="hidden shrink-0 text-xs text-ink-soft sm:block">
+            {item.meta}
+          </span>
+        ) : null}
 
-        {/* Where this document lands in the merged file. Kept at every width:
-            it is the one number you cannot work out by looking at the files. */}
-        <span className="w-[4.5rem] shrink-0 text-right text-xs text-stamp">
-          {range.start === range.end
-            ? `p. ${range.start}`
-            : `p. ${range.start}–${range.end}`}
-        </span>
+        {/* Where this file lands in the output. Kept at every width: it is the
+            one number you cannot work out by looking at the files. */}
+        {item.position ? (
+          <span className="w-[4.5rem] shrink-0 text-right text-xs text-stamp">
+            {item.position}
+          </span>
+        ) : null}
 
         <span className="flex shrink-0 items-center">
           <button
             type="button"
             onClick={() => onMove(-1)}
             disabled={isFirst}
-            aria-label={`Move ${sheet.name} earlier`}
+            aria-label={`Move ${item.name} earlier`}
             className="rounded p-1 text-ink-soft hover:text-ink disabled:opacity-25"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
@@ -123,7 +125,7 @@ export function SheetRow({
             type="button"
             onClick={() => onMove(1)}
             disabled={isLast}
-            aria-label={`Move ${sheet.name} later`}
+            aria-label={`Move ${item.name} later`}
             className="rounded p-1 text-ink-soft hover:text-ink disabled:opacity-25"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
@@ -133,7 +135,7 @@ export function SheetRow({
           <button
             type="button"
             onClick={onRemove}
-            aria-label={`Remove ${sheet.name}`}
+            aria-label={`Remove ${item.name}`}
             className="ml-1 rounded p-1 text-ink-soft hover:text-alert"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>

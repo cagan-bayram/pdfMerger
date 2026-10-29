@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const faq = [
   {
     q: "Can I merge JPG or PNG scans?",
-    a: "Not directly — this tool combines PDFs only. If your scanner produced images, convert them to PDF first. On Windows, select the images, right-click and Print, then choose 'Microsoft Print to PDF'. On a Mac, select them in Finder, right-click and choose Quick Actions, then Create PDF. On a phone, the Notes or Files app can scan straight to PDF.",
+    a: "Not with the merger — it combines PDFs only. Convert them first with the JPG to PDF tool on this site, which keeps the images on your device like everything else here, then merge the result with your other documents. Your operating system can also do it: on Windows select the images, right-click and Print, then choose 'Microsoft Print to PDF'; on a Mac select them in Finder, right-click, Quick Actions, Create PDF.",
   },
   {
     q: "Does merging reduce the quality of my scans?",

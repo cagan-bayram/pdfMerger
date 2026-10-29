@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/components/ad-slot";
 import { Merger } from "@/components/merger";
-import { Faq, SiteFooter, SiteHeader, guides } from "@/components/site-chrome";
+import { Faq, SiteFooter, SiteHeader, guides, tools } from "@/components/site-chrome";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -83,6 +83,26 @@ export default function Home() {
                   sitting in someone else&apos;s storage bucket.
                 </p>
               </div>
+            </section>
+
+            <section className="mt-14 max-w-[68ch]">
+              <h2 className="border-b border-rule pb-2 text-lg font-bold tracking-tight">
+                Other tools
+              </h2>
+              <ul className="mt-4 flex flex-col gap-2 text-sm">
+                {tools
+                  .filter((tool) => tool.href !== "/")
+                  .map((tool) => (
+                    <li key={tool.href}>
+                      <Link
+                        href={tool.href}
+                        className="text-stamp underline decoration-rule underline-offset-2 hover:decoration-stamp"
+                      >
+                        {tool.title}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
             </section>
 
             <section className="mt-14 max-w-[68ch]">

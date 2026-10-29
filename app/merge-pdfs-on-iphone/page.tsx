@@ -29,7 +29,7 @@ const faq = [
   },
   {
     q: "Can I merge photos or scans into a PDF?",
-    a: "Not directly — this tool takes PDFs only. iOS can convert for you: in the Files app, select the images, press and hold, and choose Create PDF. To scan paper, open Notes, tap the camera icon, and choose Scan Documents, which produces a far better result than photographing a page.",
+    a: "Not with the merger — it takes PDFs only. Use the JPG to PDF tool on this site instead: it turns photos into a PDF one page each, in your browser, and you can then merge that with other documents. iOS can also do it natively: in the Files app, select the images, press and hold, and choose Create PDF. To scan paper, open Notes, tap the camera icon, and choose Scan Documents, which beats photographing a page.",
   },
 ];
 

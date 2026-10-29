@@ -16,6 +16,8 @@ type GuideLayoutProps = {
   /** Prose sections, rendered above the questions. */
   children: ReactNode;
   faq: QA[];
+  /** The working tool for this page. Defaults to the merger. */
+  tool?: ReactNode;
 };
 
 /**
@@ -29,6 +31,7 @@ export function GuideLayout({
   lede,
   children,
   faq,
+  tool,
 }: GuideLayoutProps) {
   return (
     <>
@@ -44,9 +47,7 @@ export function GuideLayout({
               {lede}
             </p>
 
-            <div className="mt-8">
-              <Merger />
-            </div>
+            <div className="mt-8">{tool ?? <Merger />}</div>
 
             <AdSlot
               slot="0000000000"

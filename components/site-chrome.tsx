@@ -6,6 +6,13 @@ export const tools = [
   { href: "/jpg-to-pdf", title: "Convert JPG to PDF" },
 ] as const;
 
+export const articles = [
+  {
+    href: "/which-pdf-tools-upload-your-files",
+    title: "Which free PDF tools upload your files?",
+  },
+] as const;
+
 export const guides = [
   {
     href: "/merge-pdf-without-uploading",
@@ -86,6 +93,15 @@ export function SiteFooter() {
         </nav>
 
         <nav className="flex gap-5 sm:flex-col sm:gap-2">
+          {articles.map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="hover:text-ink"
+            >
+              Research
+            </Link>
+          ))}
           <Link href="/privacy" className="hover:text-ink">
             Privacy
           </Link>

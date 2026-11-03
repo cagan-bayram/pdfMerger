@@ -8,15 +8,11 @@ import {
 
 const href = "/which-pdf-tools-upload-your-files";
 
-// Unlisted and noindexed until the findings column is filled in from a real
-// testing session. Remove `robots` and add the page to `articles` in
-// site-chrome once the table carries observations rather than "pending".
 export const metadata: Metadata = {
   title: "Which free PDF tools upload your files?",
   description:
     "Some browser PDF tools send your document to a server. Some never do. A method anyone can repeat in thirty seconds, and what it showed across a dozen tools.",
   alternates: { canonical: href },
-  robots: { index: false, follow: false },
 };
 
 const rows: Finding[] = [
@@ -31,7 +27,7 @@ const rows: Finding[] = [
     tool: "iLovePDF",
     uploads: "yes",
     offline: "Two POSTs to api22.ilovepdf.com/v1/upload, one per file, on selecting them — before pressing merge.",
-    stated: "Deleted automatically within about 2 hours; a Delete it now button on the download page",
+    stated: "“Completely deleted within 2 hours of upload”, plus a Delete it now control on the download page",
   },
   {
     tool: "Smallpdf",
@@ -44,7 +40,7 @@ const rows: Finding[] = [
     tool: "PDF24 (web tools)",
     uploads: "yes",
     offline: "Two POSTs to filetools48.pdf24.org/client.php?action=upload, one per file, on selection.",
-    stated: "Server copy deleted after 1 hour, per its terms",
+    stated: "“The copy of the user documents processed on the provider’s servers is completely deleted after one hour” (terms, 2.5)",
   },
   {
     tool: "Sejda (web)",
@@ -64,7 +60,8 @@ const rows: Finding[] = [
     tool: "PDF2Go",
     uploads: "pending",
     offline: "—",
-    stated: "Deleted after 24 hours or 10 downloads, whichever is first",
+    stated: "“Deleted automatically according to our privacy policy schedule” — no window given on its security page. Says it keeps no backups of transmitted files",
+    note: "A widely repeated “24 hours or 10 downloads” figure does not appear on its own pages",
   },
   {
     tool: "Adobe Acrobat online",
@@ -98,7 +95,7 @@ export default function Page() {
     <ArticleLayout
       title="Which free PDF tools upload your files?"
       standfirst="Two tools can look identical and work completely differently: one sends your document to a company's server, the other never lets it leave your laptop. Nothing on either page tells you which you are using. Here is a test that takes thirty seconds, and what it showed."
-      dateline="Tested 3 November 2026 · Draft, not yet complete"
+      dateline="Tested 3 November 2026"
     >
       <Section heading="A disclosure, before anything else">
         <p>
@@ -267,9 +264,13 @@ export default function Page() {
 
       <Section heading="Sources">
         <p>
-          Retention figures are the companies&rsquo; own published statements,
-          read on the date above. Where a figure came from a third party rather
-          than the company, the table says so.
+          The iLovePDF and PDF24 figures were read directly from the pages
+          below and are quoted verbatim. PDF2Go&rsquo;s was checked the same
+          way, which is how I found that the &ldquo;24 hours or 10
+          downloads&rdquo; number repeated across comparison sites is not on
+          PDF2Go&rsquo;s own pages — a small illustration of why the primary
+          source is worth opening. Sejda&rsquo;s remains third-party and the
+          table says so.
         </p>
         <ul className="flex list-disc flex-col gap-2 pl-5">
           <li>
@@ -283,8 +284,8 @@ export default function Page() {
             </a>
           </li>
           <li>
-            <a className="underline decoration-rule hover:text-ink" href="https://pdf2go.com/blog/are-my-files-safe" rel="noopener noreferrer" target="_blank">
-              PDF2Go — are my files safe
+            <a className="underline decoration-rule hover:text-ink" href="https://www.pdf2go.com/security" rel="noopener noreferrer" target="_blank">
+              PDF2Go — security
             </a>
           </li>
           <li>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { guides, tools } from "@/components/site-chrome";
+import { articles, guides, tools } from "@/components/site-chrome";
 import { SITE_URL } from "@/lib/site";
 
 // Emitted as a file at build time, not served by a running route.
@@ -16,6 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: now,
         priority: 0.9,
       })),
+    ...articles.map((article) => ({
+      url: `${SITE_URL}${article.href}`,
+      lastModified: now,
+      priority: 0.9,
+    })),
     ...guides.map((guide) => ({
       url: `${SITE_URL}${guide.href}`,
       lastModified: now,

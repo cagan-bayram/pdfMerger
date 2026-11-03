@@ -40,24 +40,22 @@ export function AdSlot({ slot, width, height, label, className }: AdSlotProps) {
     }
   }, [live]);
 
+  // With no ad to show, render nothing at all. A dashed "300 × 600" box is a
+  // development aid; shipping it makes a finished site look half-built.
+  if (!live) return null;
+
   return (
     <aside
       aria-label={label}
       className={className}
       style={{ width, height, maxWidth: "100%" }}
     >
-      {live ? (
-        <ins
-          className="adsbygoogle block"
-          style={{ display: "block", width, height }}
-          data-ad-client={ADSENSE_CLIENT}
-          data-ad-slot={slot}
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center border border-dashed border-rule bg-sheet/50 text-[11px] text-ink-soft">
-          {width} × {height}
-        </div>
-      )}
+      <ins
+        className="adsbygoogle block"
+        style={{ display: "block", width, height }}
+        data-ad-client={ADSENSE_CLIENT}
+        data-ad-slot={slot}
+      />
     </aside>
   );
 }

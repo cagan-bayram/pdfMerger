@@ -42,22 +42,15 @@ export default function Privacy() {
         <section>
           <h2 className="text-base font-bold">Advertising</h2>
           <p className="mt-2 text-ink-soft">
-            This site shows ads served by Google AdSense. Google and its
-            partners may set cookies or read device identifiers to measure and
-            personalise the ads you see, and that data is collected by Google
-            rather than by us. You can review and change what Google collects
-            at{" "}
-            <a
-              className="underline decoration-rule hover:text-ink"
-              href="https://myadcenter.google.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              My Ad Center
-            </a>
-            . If you are in the EEA, UK or Switzerland, you will be asked for
-            consent before personalised ads load, and you can change that
-            choice at any time from the link in the footer.
+            This site currently shows no ads, and loads no advertising code. No
+            advertising cookie is set and no ad network receives anything about
+            your visit.
+          </p>
+          <p className="mt-2 text-ink-soft">
+            That may change. If advertising is added, this page will say so
+            before the first ad appears, and visitors in the EEA, UK and
+            Switzerland will be asked for consent before any personalised ad
+            loads.
           </p>
         </section>
 

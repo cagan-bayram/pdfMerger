@@ -20,17 +20,77 @@ export const metadata: Metadata = {
 };
 
 const rows: Finding[] = [
-  { tool: "Stack PDF", uploads: "pending", offline: "—", stated: "No server to retain anything", note: "This site. See the disclosure below." },
-  { tool: "iLovePDF", uploads: "pending", offline: "—", stated: "Deleted automatically within about 2 hours; a Delete it now button on the download page" },
-  { tool: "Smallpdf", uploads: "pending", offline: "—", stated: "14 days for eSign documents; window for the ordinary tools not stated in the sources found" },
-  { tool: "PDF24 (web tools)", uploads: "pending", offline: "—", stated: "Server copy deleted after 1 hour, per its terms" },
-  { tool: "PDF2Go", uploads: "pending", offline: "—", stated: "Deleted after 24 hours or 10 downloads, whichever is first" },
-  { tool: "Sejda (web)", uploads: "pending", offline: "—", stated: "2 hours per a third-party review; not confirmed from Sejda's own policy", note: "Its desktop app is said not to upload at all" },
-  { tool: "Adobe Acrobat online", uploads: "pending", offline: "—", stated: "Not checked yet" },
-  { tool: "CoolPDF", uploads: "pending", offline: "—", stated: "Claims no backend at all", note: "Open source, AGPL-3.0" },
-  { tool: "PDFyogi", uploads: "pending", offline: "—", stated: "Claims browser-only processing" },
-  { tool: "PDFTasker", uploads: "pending", offline: "—", stated: "Claims browser-only processing" },
-  { tool: "localbench", uploads: "pending", offline: "—", stated: "Static, open source, CSP blocks outbound requests" },
+  {
+    tool: "Stack PDF",
+    uploads: "no",
+    offline: "No request carried the file. The only POST was a pageview beacon of a few hundred bytes.",
+    stated: "No server to retain anything",
+    note: "This site. See the disclosure above.",
+  },
+  {
+    tool: "iLovePDF",
+    uploads: "yes",
+    offline: "Two POSTs to api22.ilovepdf.com/v1/upload, one per file, on selecting them — before pressing merge.",
+    stated: "Deleted automatically within about 2 hours; a Delete it now button on the download page",
+  },
+  {
+    tool: "Smallpdf",
+    uploads: "yes",
+    offline: "Two PUTs to files-upload.r2.smallpdf.com, one per file, then a processing task created. On selection.",
+    stated: "14 days for eSign documents; the window for the ordinary tools was not stated in the sources found",
+    note: "Files go to object storage, not only to memory",
+  },
+  {
+    tool: "PDF24 (web tools)",
+    uploads: "yes",
+    offline: "Two POSTs to filetools48.pdf24.org/client.php?action=upload, one per file, on selection.",
+    stated: "Server copy deleted after 1 hour, per its terms",
+  },
+  {
+    tool: "Sejda (web)",
+    uploads: "blocked",
+    offline: "The upload widget came up in an error state in the automated session and never offered a file picker.",
+    stated: "2 hours per a third-party review; not confirmed from Sejda's own policy",
+    note: "Its desktop app is said not to upload at all",
+  },
+  {
+    tool: "CoolPDF",
+    uploads: "blocked",
+    offline: "getcoolpdf.com did not resolve on the test date.",
+    stated: "Claims no backend at all",
+    note: "Open source, AGPL-3.0",
+  },
+  {
+    tool: "PDF2Go",
+    uploads: "pending",
+    offline: "—",
+    stated: "Deleted after 24 hours or 10 downloads, whichever is first",
+  },
+  {
+    tool: "Adobe Acrobat online",
+    uploads: "pending",
+    offline: "—",
+    stated: "Not checked",
+  },
+  {
+    tool: "PDFyogi",
+    uploads: "pending",
+    offline: "—",
+    stated: "Claims browser-only processing",
+  },
+  {
+    tool: "PDFTasker",
+    uploads: "pending",
+    offline: "—",
+    stated: "Claims browser-only processing",
+  },
+  {
+    tool: "localbench",
+    uploads: "pending",
+    offline: "—",
+    stated: "Static, open source, CSP blocks outbound requests",
+    note: "Auditable from source rather than by observation",
+  },
 ];
 
 export default function Page() {
@@ -38,7 +98,7 @@ export default function Page() {
     <ArticleLayout
       title="Which free PDF tools upload your files?"
       standfirst="Two tools can look identical and work completely differently: one sends your document to a company's server, the other never lets it leave your laptop. Nothing on either page tells you which you are using. Here is a test that takes thirty seconds, and what it showed."
-      dateline="Draft — findings pending a testing session"
+      dateline="Tested 3 November 2026 · Draft, not yet complete"
     >
       <Section heading="A disclosure, before anything else">
         <p>
@@ -109,13 +169,60 @@ export default function Page() {
 
       <Section heading="What the test showed">
         <p>
-          Each tool was given the same two-page PDF and put through its merge
-          function, with the offline test first and the Network tab as
-          confirmation. The stated retention column comes from each
-          company&rsquo;s own published material, linked in the sources at the
-          end, not from the test.
+          Every tool was given the same pair of two-page PDFs, 1.4 MB each,
+          padded with random noise so that an upload would be unmistakable in a
+          network log by size alone. The files contained nothing real. Consent
+          dialogs were refused wherever a refuse option existed.
+        </p>
+        <p>
+          <strong>How this was run matters, so here it is plainly:</strong> the
+          sessions were driven by an automated browser rather than by hand,
+          and the result is the network log, not the offline test described
+          above. That is a weaker method in one specific way — a site can serve
+          different code to something it suspects is a bot, and two of the
+          tools below never reached a working state at all, which may be
+          exactly that. Where a session did not complete, the row says
+          &ldquo;could not test&rdquo; rather than guessing. The offline test
+          is still the one to use yourself; it needs no tooling and cannot be
+          fooled.
+        </p>
+        <p>
+          The stated retention column is from each company&rsquo;s own
+          published material, linked at the end, and was not tested.
         </p>
         <FindingsTable rows={rows} />
+      </Section>
+
+      <Section heading="Every upload happened before I pressed the button">
+        <p>
+          The detail that surprised me: in all three cases the upload fired the
+          moment the file was <em>selected</em>, not when the merge was
+          requested. By the time you have read the options and decided whether
+          to continue, your document is already on their server.
+        </p>
+        <p>
+          That matters for the common situation of changing your mind. Picking
+          a file to see whether a tool looks trustworthy, then closing the tab,
+          does not keep the document on your machine — it has already left.
+        </p>
+      </Section>
+
+      <Section heading="A note on the consent dialogs">
+        <p>
+          Not what I set out to measure, but hard to miss. Two of the three
+          offered no one-click way to refuse: iLovePDF presented
+          &ldquo;Accept all&rdquo; alongside &ldquo;Manage Options&rdquo;, and
+          PDF24 presented &ldquo;Accept all&rdquo; alongside
+          &ldquo;Settings&rdquo;. Refusing took several more clicks than
+          accepting in both.
+        </p>
+        <p>
+          PDF24&rsquo;s dialog named 1,809 advertising partners;
+          iLovePDF&rsquo;s named 154 TCF vendors and 53 ad partners. GDPR
+          requires that withdrawing consent be as easy as giving it, which is
+          the basis on which regulators have fined far larger companies for
+          this exact layout.
+        </p>
       </Section>
 
       <Section heading="What this proves, and what it does not">

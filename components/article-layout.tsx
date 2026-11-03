@@ -81,7 +81,7 @@ export function Section({
 export type Finding = {
   tool: string;
   /** Observed: does the file leave the device? */
-  uploads: "yes" | "no" | "pending";
+  uploads: "yes" | "no" | "pending" | "blocked";
   /** What happened when the page was loaded and then taken offline. */
   offline: string;
   /** The company's own stated retention, with the source linked separately. */
@@ -95,14 +95,12 @@ export function FindingsTable({ rows }: { rows: Finding[] }) {
       ? "Uploads"
       : value === "no"
         ? "Stays local"
-        : "Not yet tested";
+        : value === "blocked"
+          ? "Could not test"
+          : "Not yet tested";
 
   const tone = (value: Finding["uploads"]) =>
-    value === "no"
-      ? "text-stamp"
-      : value === "pending"
-        ? "text-ink-soft"
-        : "text-ink";
+    value === "no" ? "text-stamp" : value === "yes" ? "text-ink" : "text-ink-soft";
 
   return (
     <div className="-mx-5 overflow-x-auto px-5">
@@ -111,7 +109,7 @@ export function FindingsTable({ rows }: { rows: Finding[] }) {
           <tr className="border-b border-rule text-xs text-ink-soft">
             <th className="py-2 pr-4 font-semibold">Tool</th>
             <th className="py-2 pr-4 font-semibold">File leaves device?</th>
-            <th className="py-2 pr-4 font-semibold">Works offline?</th>
+            <th className="py-2 pr-4 font-semibold">What was observed</th>
             <th className="py-2 font-semibold">Stated retention</th>
           </tr>
         </thead>
